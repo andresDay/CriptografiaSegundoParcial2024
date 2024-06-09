@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GoogleApiService } from './google-api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'CriptografiaSegundoParcial';
 
-  userLogged= false;
-  user = 'juancito';
-  email = 'juancito@gmail.com'
+  constructor(public readonly google: GoogleApiService){
+
+  }
+
+  userLogged= true;
+  // user = 'juancito';
+  // email = 'juancito@gmail.com'
+
+  onLogin(){
+    this.google.login();
+  }
+
+  onLogout(){
+    this.google.logout();
+  }
 }

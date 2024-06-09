@@ -1,40 +1,40 @@
-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+// content {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     background-color: #f0f0f0;
+//     margin: 0;
+//     font-family: Arial, sans-serif;
+// }
 
-.button-container {
-    display: flex;
-    gap: 20px;
-}
+// .button-container {
+//     display: flex;
+//     gap: 20px;
+// }
 
-.button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+// .button {
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     color: white;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease;
+// }
 
-.login-button {
-    background-color: #4CAF50;
-}
+// .login-button {
+//     background-color: #4CAF50;
+// }
 
-.login-button:hover {
-    background-color: #45a049;
-}
+// .login-button:hover {
+//     background-color: #45a049;
+// }
 
-.logout-button {
-    background-color: #f44336;
-}
+// .logout-button {
+//     background-color: #f44336;
+// }
 
-.logout-button:hover {
-    background-color: #e53935;
-}
+// .logout-button:hover {
+//     background-color: #e53935;
+// }

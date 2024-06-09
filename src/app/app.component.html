@@ -1,30 +1,46 @@
-<div class="container">
-
+<div class="container text-center">
   <h1>Segundo parcial Criptografía 2024</h1>
+
   <h3>Integrantes</h3>
-  <ul>
+  <ul class="list-unstyled">
     <li>Santiago Cammarano</li>
     <li>Nicolás Castellino</li>
     <li>Alejandro Tacchella</li>
     <li>Andrés Dayan</li>
   </ul>
+  <hr class="mt-5">
   <div class="content">
-    <div class="button-container">
-      <button class="button login-button">Login</button>
-      <button class="button logout-button">Logout</button>
+    <div class="button-container mt-5 mb-5">
+      <button class="btn btn-primary login-button me-5" (click)="onLogin()">Login</button>
+      <button class="btn btn-danger logout-button" (click)="onLogout()">Logout</button>
     </div>
 
     <div class="info-container">
-      <h2> Información de la cuenta:</h2>
-      <div *ngIf="!userLogged">
+      <h2 class="mb-5"> Información de la cuenta:</h2>
+      <div *ngIf="!this.google.isLogged" class="text-center">
         No hay usuarios conectados
       </div>
 
-      <div *ngIf="userLogged">
-        <h4>Usuario: {{user}} </h4>
-        <h4>Email: {{email}} </h4>
+      <div *ngIf="this.google.isLogged">
+        <div class="row">
+          <div class="col-md-2 offset-md-4">
+            <h4>Usuario:</h4>
+          </div>
+          <div class="col-md-2">
+            <h6>{{this.google.userProfile?.info.name}}</h6>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-2 offset-md-4">
+            <h4>Email:</h4>
+          </div>
+          <div class="col-md-2">
+            <h6>{{this.google.userProfile?.info.email}}</h6>
+          </div>
+        </div>
       </div>
+      
     </div>
-
   </div>
 </div>
