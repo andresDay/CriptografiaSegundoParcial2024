@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CriptografiaSegundoParcial';
+
+  userLogged= false;
+  user = 'juancito';
+  email = 'juancito@gmail.com'
 }
