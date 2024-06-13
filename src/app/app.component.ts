@@ -1,27 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GoogleApiService } from './google-api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'CriptografiaSegundoParcial';
+  userProfile: any;
+  private userProfileSubscription = new Subscription();
 
-  constructor(public readonly google: GoogleApiService){
-
+  constructor(public readonly google: GoogleApiService) {
+    this.userProfileSubscription = this.google.userProfileChanged.subscribe(
+      (userProfile) => {
+        this.userProfile = userProfile;
+      }
+    );
   }
 
-  userLogged= true;
-  // user = 'juancito';
-  // email = 'juancito@gmail.com'
+  ngOnInit() {
+    // Verifica la autenticación al iniciar la aplicación
+    this.google.checkAuthentication();
+  }
 
-  onLogin(){
+  onLogin() {
     this.google.login();
   }
 
-  onLogout(){
+  onLogout() {
     this.google.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.userProfileSubscription.unsubscribe();
   }
 }
