@@ -30,7 +30,7 @@
             <h6>{{this.google.userProfile?.info.name}}</h6>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col-md-2 offset-md-4">
             <h4>Email:</h4>
@@ -40,7 +40,35 @@
           </div>
         </div>
       </div>
-      
+
+    </div>
+
+
+  </div>
+
+  <hr class="mt-5">
+  <div class="content mb-5">
+    <div class="button-container mt-5 mb-5">
+      <button class="btn btn-secondary login-button me-5" (click)="onGetFiles()">Get Files from Drive</button>
+    </div>
+
+    <div class="info-container">
+      <div *ngIf="this.google.isLogged">
+        <div class="col-md-8 offset-md-2">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">File Names</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fileName of fileNames">
+                <td>{{ fileName }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
     </div>
   </div>
-</div>

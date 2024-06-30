@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GoogleApiService } from './google-api.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'CriptografiaSegundoParcial';
   userProfile: any;
+  fileNames: any;
   private userProfileSubscription = new Subscription();
 
   constructor(public readonly google: GoogleApiService) {
@@ -31,6 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.google.logout();
+  }
+
+  onGetFiles(){
+    this.google.getFilesFromServer().subscribe((fileNames)=> {
+      this.fileNames = fileNames;
+      console.log(this.fileNames);
+    })
   }
 
   ngOnDestroy(): void {

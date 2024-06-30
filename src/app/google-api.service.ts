@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
-import { Subject } from 'rxjs';
+import { Subject, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 const oAuthConfig: AuthConfig = {
   issuer: 'https://accounts.google.com',
   strictDiscoveryDocumentValidation: false,
   redirectUri: window.location.origin,
   clientId: '682533934194-fgf1vvle90bghjiiviv16i0g0s6mdhif.apps.googleusercontent.com',
-  scope: 'openid profile email',
+  scope: 'openid profile email https://www.googleapis.com/auth/drive  https://www.googleapis.com/auth/drive.file',
+  // 'https://www.googleapis.com/auth/drive.readonly'
   requireHttps: true // HTTPS obligatorio para producción
 };
+
+const key = 'AIzaSyBoySyFCT6UkbEdXckdmQELHUHEEfMqgwo'; 
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +24,7 @@ export class GoogleApiService {
   isLogged = false;
   userProfile: any;
 
-  constructor(private readonly oAuthService: OAuthService) {
+  constructor(private readonly oAuthService: OAuthService, private http: HttpClient) {
     this.oAuthService.configure(oAuthConfig);
     this.oAuthService.logoutUrl = 'https://www.google.com/accounts/Logout';
     this.checkAuthentication();
@@ -63,4 +67,18 @@ export class GoogleApiService {
       });
     });
   }
-}
+
+  public getFilesFromServer() {
+    const url = 'https://www.googleapis.com/drive/v3/files';
+    const headers = {
+      'Authorization': `Bearer ${this.oAuthService.getAccessToken()}`
+    };
+      //  return this.http.get(url, { headers });
+       return this.http.get<{ files: {  name: string }[] }>(url, { headers })
+      
+       .pipe(
+           map(response => response.files
+             .map(file => file.name))
+         );
+     }
+  }
